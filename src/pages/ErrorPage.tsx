@@ -3,8 +3,10 @@ import { ErrorResponse, useNavigate, useRouteError } from 'react-router-dom';
 
 import Button from '../components/Button';
 
+interface IErrorResponse extends ErrorResponse, Error {}
+
 const ErrorPage: FC = () => {
-  const error = useRouteError() as ErrorResponse;
+  const error = useRouteError() as IErrorResponse;
   const navigate = useNavigate();
 
   const handleClick = () => {

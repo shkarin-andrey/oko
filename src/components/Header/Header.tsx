@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import Button from '../Button';
 import Hamburger from '../Hamburger';
-import Logo from '../Logo/Logo';
+import Logo from '../Logo';
 
 interface IHeader {
   isOpenMenu: boolean;
