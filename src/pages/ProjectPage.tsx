@@ -92,7 +92,7 @@ const ProjectPage: FC = () => {
           </Panel>
         </FlowTasks>
       </ReactFlowProvider>
-      {hierarchy?.burndown && hierarchy?.statistics && (
+      {sprints && sprints.length > 0 && hierarchy?.burndown && hierarchy?.statistics && (
         <DrawerInfo
           burndown={hierarchy.burndown.data}
           isOpenInformations={isOpenInformations}
