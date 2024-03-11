@@ -1,6 +1,7 @@
 import { FC, memo } from 'react';
 import { Handle, Position } from 'reactflow';
 
+import noAvatar from '/no-avatar.svg';
 import bugImg from '/taskType/bug.svg';
 import featImg from '/taskType/feat.svg';
 
@@ -20,12 +21,33 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
           <img src={typeTask} className='w-4 h-4' alt={data.key} />
           <div className='text-sm'>{data.key}</div>
         </div>
-        <div className='flex items-center gap-1'>
-          <div className='bg-[#1998FF1A] text-[#1998FF] px-[6px] rounded-sm text-sm w-fit'>
-            {data.increment_points}
+        <div className='flex gap-1 items-center'>
+          <div className='w-4 h-4 rounded-md overflow-hidden'>
+            <img
+              src={data.avatar[0] ?? noAvatar}
+              alt={data.assignee}
+              className='w-full h-full object-cover'
+            />
           </div>
-          <div className='bg-[#4453711A] text-[#445371] px-[6px] rounded-sm text-sm w-fit'>
-            {data.inherited_increment_points}
+          <div className='text-xs'>{data.assignee}</div>
+        </div>
+        <div className='flex items-center gap-3'>
+          <div className='flex items-center gap-1'>
+            <div className='bg-[#1998FF1A] text-[#1998FF] px-[6px] rounded-sm text-sm w-fit'>
+              {data.increment_points}
+            </div>
+            <div className='bg-[#4453711A] text-[#445371] px-[6px] rounded-sm text-sm w-fit'>
+              {data.inherited_increment_points}
+            </div>
+          </div>
+          <div
+            className='text-xs px-[6px] py-0.5 rounded-sm w-fit'
+            style={{
+              background: `${data.color}30`,
+              color: data.color,
+            }}
+          >
+            {data.status[0]}
           </div>
         </div>
       </div>

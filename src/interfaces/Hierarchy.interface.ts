@@ -2,7 +2,6 @@ export interface Hierarchy {
   burndown: Burndown;
   statistics: Statistics;
   tasks: Record<string, RootTask>;
-  root_tasks: RootTask[];
 }
 
 export interface Burndown {
@@ -23,6 +22,10 @@ export interface RootTask {
   increment_points: number;
   is_bug: boolean;
   inherited_increment_points: number;
+  status: (string | null)[];
+  avatar: string[];
+  assignee: string;
+  color: string;
 }
 
 export interface Statistics {
