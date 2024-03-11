@@ -1,14 +1,10 @@
 import { FC, memo } from 'react';
-import { Handle, NodeProps, Position } from 'reactflow';
+import { Handle, Position } from 'reactflow';
 
 import bugImg from '/taskType/bug.svg';
 import featImg from '/taskType/feat.svg';
 
-import { NodeData } from '../../interfaces/ReactFlow.interface';
-
-interface ICustomTaskNode extends NodeProps {
-  data: Omit<NodeData, 'children'>;
-}
+import { ICustomTaskNode } from './CustomTaskNode.interface';
 
 const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
   const typeTask = data.is_bug ? bugImg : featImg;
@@ -24,9 +20,12 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
           <img src={typeTask} className='w-4 h-4' alt={data.key} />
           <div className='text-sm'>{data.key}</div>
         </div>
-        <div>
+        <div className='flex items-center gap-1'>
           <div className='bg-[#1998FF1A] text-[#1998FF] px-[6px] rounded-sm text-sm w-fit'>
             {data.increment_points}
+          </div>
+          <div className='bg-[#4453711A] text-[#445371] px-[6px] rounded-sm text-sm w-fit'>
+            {data.inherited_increment_points}
           </div>
         </div>
       </div>

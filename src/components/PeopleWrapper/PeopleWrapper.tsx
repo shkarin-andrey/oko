@@ -1,10 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-interface IPeopleWrapper {
-  title: string;
-  children: ReactNode;
-  className?: React.HTMLAttributes<HTMLDivElement>['className'];
-}
+import { IPeopleWrapper } from './PeopleWrapper.interface';
 
 const PeopleWrapper: FC<IPeopleWrapper> = ({ title, children, className }) => {
   return (

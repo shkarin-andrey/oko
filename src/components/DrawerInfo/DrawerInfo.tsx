@@ -10,24 +10,12 @@ import {
 } from 'recharts';
 import { Props as XAxisProps } from 'recharts/types/cartesian/XAxis';
 
-import { BurndownItem, Statistics } from '../../interfaces/Hierarchy.interface';
 import CircleProgress from '../CircleProgress';
 import PeopleList from '../PeopleList';
 import PeopleWrapper from '../PeopleWrapper';
+import { IDrowerInfo } from './DrowerInfo.interface';
 
-interface IDrowerInfo {
-  statistics: Statistics;
-  isOpenInformations: boolean;
-  burndown: BurndownItem[];
-  isLoading?: boolean;
-}
-
-const DrawerInfo: FC<IDrowerInfo> = ({
-  statistics,
-  isOpenInformations,
-  burndown,
-  isLoading = false,
-}) => {
+const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown }) => {
   const {
     authors,
     reviewers,
@@ -62,10 +50,6 @@ const DrawerInfo: FC<IDrowerInfo> = ({
     tickMargin: 10,
     angle: 45,
   };
-
-  if (isLoading) {
-    return <h1>Загрузка...</h1>;
-  }
 
   return (
     <div

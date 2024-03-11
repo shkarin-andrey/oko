@@ -1,9 +1,6 @@
 import { FC } from 'react';
 
-interface IHamburger {
-  isOpenMenu: boolean;
-  onClick: () => void;
-}
+import { IHamburger } from './Hamburger.interface';
 
 const Hamburger: FC<IHamburger> = ({ isOpenMenu, onClick }) => {
   const classNameIsOpenMenu = isOpenMenu

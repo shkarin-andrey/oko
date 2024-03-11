@@ -4,38 +4,40 @@ import ReactFlow, {
   Background,
   ConnectionLineType,
   Controls,
-  Edge,
   MiniMap,
-  Node,
-  NodeTypes,
   OnConnect,
   addEdge,
   useEdgesState,
   useNodesState,
 } from 'reactflow';
-import CustomTaskNode from '../CustomTaskNode';
+import { generateEdgesTasks } from '../../utils/generateEdgesTasks';
+import { generateNodesTasks } from '../../utils/generateNodesTasks';
+import { getLayoutedElements } from '../../utils/getLayoutedElements';
+import { nodeTypes } from './FlowTasks.config';
+import { IFlowTasks } from './FlowTasks.interface';
 
-interface IFlowTasks {
-  children?: React.ReactNode;
-  layoutedNodes: Node[];
-  layoutedEdges: Edge[];
-}
-
-const nodeTypes: NodeTypes = { task: CustomTaskNode };
-
-const FlowTasks: FC<IFlowTasks> = ({ layoutedEdges, layoutedNodes, children }) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes || []);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges || []);
+const FlowTasks: FC<IFlowTasks> = ({ tasks, children }) => {
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
   useEffect(() => {
-    if (!layoutedEdges.length && !layoutedNodes.length) {
+    if (!tasks) {
       setNodes([]);
       setEdges([]);
       return;
     }
+
+    const initialNodes = generateNodesTasks(tasks);
+    const initialEdges = generateEdgesTasks(tasks);
+
+    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+      initialNodes,
+      initialEdges,
+    );
+
     setNodes(layoutedNodes);
     setEdges(layoutedEdges);
-  }, [layoutedEdges, layoutedNodes, setNodes, setEdges]);
+  }, [tasks]);
 
   const onConnect: OnConnect = useCallback(
     (params) =>

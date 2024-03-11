@@ -1,8 +1,6 @@
 import { FC } from 'react';
 
-interface ILoader {
-  value?: string;
-}
+import { ILoader } from './Loader.interface';
 
 const Loader: FC<ILoader> = ({ value = 'Загрузка...' }) => {
   return (

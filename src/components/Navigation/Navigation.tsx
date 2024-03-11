@@ -1,11 +1,7 @@
 import { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { IRouts } from '../../interfaces/Routs.interface';
-
-interface INavigation {
-  routs: IRouts[];
-}
+import { INavigation } from './Navigation.interface';
 
 const Navigation: FC<INavigation> = ({ routs }) => {
   return (
@@ -13,7 +9,7 @@ const Navigation: FC<INavigation> = ({ routs }) => {
       {routs.map((item) => (
         <NavLink
           key={item.to}
-          to={`projects/${item.to}`}
+          to={`/projects/${item.to}`}
           className={({ isActive }) =>
             `py-2 px-3 hover:text-[#0055FF] hover:bg-gray-100 cursor-pointer transition-all duration-200 ${
               isActive ? 'text-[#0055FF] bg-[#0055FF0D]' : 'text-[#445371]'

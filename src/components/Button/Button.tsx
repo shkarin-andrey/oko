@@ -1,8 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 
-interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-}
+import { IButton } from './Button.interface';
 
 const Button: FC<IButton> = ({ children, className, ...props }) => {
   return (

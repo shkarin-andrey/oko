@@ -1,10 +1,6 @@
 import { FC } from 'react';
 
-interface IPeopleList {
-  avatar: string;
-  title: string;
-  doneTasks: number;
-}
+import { IPeopleList } from './PeopleList.interface';
 
 const PeopleList: FC<IPeopleList> = ({ avatar, title, doneTasks }) => {
   return (
