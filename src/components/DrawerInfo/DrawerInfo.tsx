@@ -33,7 +33,9 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
   const testerNames = Object.keys(testers);
   const assigneeNames = Object.keys(assignees);
 
-  const classNameInformations = isOpenInformations ? 'translate-x-0' : 'translate-x-full';
+  const classNameInformations = isOpenInformations
+    ? 'sm:translate-x-0'
+    : 'sm:translate-x-full';
 
   const burndownData = burndown.map((item) => {
     const date = item.date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$2.$3');
@@ -53,7 +55,7 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
 
   return (
     <div
-      className={`transition-transform bg-white p-3 flex flex-col gap-5 absolute right-0 top-0 h-[calc(100vh-73px)] overflow-y-auto ${classNameInformations}`}
+      className={`sm:max-w-[390px] transition-transform bg-white sm:px-3 sm:py-3 flex flex-col gap-5 sm:absolute right-0 top-0 h-full sm:h-[calc(100vh-73px)] py-5 sm:overflow-y-auto ${classNameInformations}`}
     >
       <PeopleWrapper title='Прогресс закрытия тасок'>
         <ResponsiveContainer width={'100%'} height={200} className='text-xs'>
@@ -71,12 +73,12 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
           </LineChart>
         </ResponsiveContainer>
       </PeopleWrapper>
-      <PeopleWrapper title='Статистика' className='!flex-row items-center'>
+      <PeopleWrapper title='Статистика' className='sm:!flex-row items-center'>
         <CircleProgress
           progress={sprint_completion_percentage}
           label='Выполнение спринта'
         />
-        <div className='h-full w-0.5 bg-[#44537126]' />
+        <div className='w-full h-0.5 sm:h-full sm:w-0.5 bg-[#44537126]' />
         <div className='flex flex-col gap-2'>
           <div>
             <div className='font-normal text-sm'>Прошло:</div>

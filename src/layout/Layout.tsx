@@ -18,16 +18,16 @@ const Layout: FC<ILoader> = ({ children, isLoading = false }) => {
   const classNameMobileMenu = isOpenMenu ? 'translate-x-0' : '-translate-x-full';
 
   return (
-    <div className='h-screen'>
+    <div className='h-screen overflow-hidden'>
       <Header isOpenMenu={isOpenMenu} onClick={handleClickHamburger} />
       <div className='relative h-[calc(100vh-73px)] flex w-full'>
         <aside
-          className={`transition-transform duration-200 h-full sm:translate-x-0 overflow-y-auto min-w-[300px] border-r border-[#44537126] bg-[#F9FAFB] py-6 px-8 flex flex-col gap-[20px] absolute sm:static top-0 left-0 ${classNameMobileMenu}`}
+          className={`z-10 transition-transform duration-200 h-full lg:translate-x-0 overflow-y-auto min-w-[300px] border-r border-[#44537126] bg-[#F9FAFB] py-6 px-8 flex flex-col gap-[20px] absolute lg:static top-0 left-0 ${classNameMobileMenu}`}
         >
           <div className='text-[#858FA3]'>Проекты</div>
           <Navigation routs={routs || []} />
         </aside>
-        <main className='w-full p-6'>
+        <main className='w-full p-6 overflow-auto sm:overflow-hidden'>
           {isLoading ? (
             <div className='w-full h-full flex justify-center items-center'>
               <Loader />

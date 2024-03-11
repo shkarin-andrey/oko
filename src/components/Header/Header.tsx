@@ -34,7 +34,7 @@ const Header: FC<IHeader> = ({ isOpenMenu, onClick }) => {
   };
 
   return (
-    <header className='w-full justify-between py-3 px-6 flex items-center border-b border-[#44537126]'>
+    <header className='w-full h-[72px] justify-between py-3 px-6 flex items-center border-b border-[#44537126]'>
       <Logo />
       {isProjects && (
         <Button disabled={isFetching || isLoading} onClick={handleClick}>
