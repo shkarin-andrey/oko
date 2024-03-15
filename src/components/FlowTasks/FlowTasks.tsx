@@ -13,7 +13,7 @@ import ReactFlow, {
 import { generateEdgesTasks } from '../../utils/generateEdgesTasks';
 import { generateNodesTasks } from '../../utils/generateNodesTasks';
 import { getLayoutedElements } from '../../utils/getLayoutedElements';
-import { nodeTypes } from './FlowTasks.config';
+import { nodeTypes, panOnDrag } from './FlowTasks.config';
 import { IFlowTasks } from './FlowTasks.interface';
 
 const FlowTasks: FC<IFlowTasks> = ({ tasks, children }) => {
@@ -58,6 +58,8 @@ const FlowTasks: FC<IFlowTasks> = ({ tasks, children }) => {
       nodeTypes={nodeTypes}
       connectionLineType={ConnectionLineType.SmoothStep}
       fitView
+      panOnDrag={panOnDrag}
+      panOnScroll
     >
       <MiniMap />
       <Controls />
