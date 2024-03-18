@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -71,18 +71,20 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
     >
       <PeopleWrapper title='Прогресс закрытия тасок'>
         <ResponsiveContainer width={'100%'} height={200} className='text-xs'>
-          <LineChart
+          <BarChart
             height={200}
             data={burndownData}
             title='Прогресс закрытия тасок'
             margin={{ left: -35, right: 0, bottom: 5 }}
+            barGap={0}
           >
             <CartesianGrid strokeDasharray='3 3' />
             <XAxis {...args} />
             <YAxis dataKey={'y'} />
             <Tooltip />
-            <Line dataKey='y' stroke='#2563eb' />
-          </LineChart>
+            {/* <Line dataKey='y' stroke='#2563eb' /> */}
+            <Bar dataKey='y' fill='#8884d8' />
+          </BarChart>
         </ResponsiveContainer>
       </PeopleWrapper>
       <PeopleWrapper title='Статистика' className='sm:!flex-row items-center'>

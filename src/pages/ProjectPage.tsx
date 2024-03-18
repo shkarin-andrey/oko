@@ -1,8 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { ParamParseKey, Params, useParams } from 'react-router-dom';
 import { Panel, ReactFlowProvider } from 'reactflow';
 
-import Button from '../components/Button';
 import DrawerInfo from '../components/DrawerInfo';
 import FlowTasks from '../components/FlowTasks';
 import { useAppDispatch } from '../hooks/useAppDispatch';
@@ -16,6 +15,7 @@ import { Paths } from '../routers/routers.config';
 const ProjectPage: FC = () => {
   const dispatch = useAppDispatch();
   const select = useAppSelector((state) => state.sprint.select);
+  const isOpenInformations = useAppSelector((state) => state.sprint.isOpenInformations);
 
   const { id } = useParams() as Params<ParamParseKey<typeof Paths.projectsDetail>>;
   const sprintId = id ? +id : undefined;
@@ -41,8 +41,6 @@ const ProjectPage: FC = () => {
     },
   );
 
-  const [isOpenInformations, setIsOpenInformations] = useState(false);
-
   useEffect(() => {
     if (!sprints || sprints.length === 0) {
       dispatch(selectSprint(undefined));
@@ -50,10 +48,6 @@ const ProjectPage: FC = () => {
     }
     dispatch(selectSprint(sprints[0].value));
   }, [sprints]);
-
-  const handleOpenInformations = () => {
-    setIsOpenInformations((prev) => !prev);
-  };
 
   const handleChangeSprint = (e: React.FormEvent<HTMLSelectElement>) => {
     dispatch(selectSprint(+e.currentTarget.value));
@@ -67,13 +61,6 @@ const ProjectPage: FC = () => {
       <ReactFlowProvider>
         <FlowTasks tasks={sprints?.length ? hierarchy?.tasks : undefined}>
           <Panel position='top-left' className='flex flex-col gap-2'>
-            <Button
-              disabled={!sprints?.length || isHierarchyLoading}
-              onClick={handleOpenInformations}
-              className='w-fit hidden sm:flex'
-            >
-              Информация
-            </Button>
             {sprints && sprints.length > 0 ? (
               <select
                 onChange={handleChangeSprint}
