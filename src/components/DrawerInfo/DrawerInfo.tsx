@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   CartesianGrid,
   Line,
@@ -53,6 +53,18 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
     angle: 45,
   };
 
+  const circleColorProgress = useMemo(() => {
+    if (sprint_completion_percentage < 45) {
+      return '#D91528';
+    }
+
+    if (sprint_completion_percentage >= 45) {
+      return '#F29100';
+    }
+
+    return '#019F3C';
+  }, [sprint_completion_percentage]);
+
   return (
     <div
       className={`sm:max-w-[390px] transition-transform bg-white sm:px-3 sm:py-3 flex flex-col gap-5 sm:absolute right-0 top-0 h-full sm:h-[calc(100vh-73px)] py-5 sm:overflow-y-auto ${classNameInformations}`}
@@ -76,6 +88,7 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
       <PeopleWrapper title='Статистика' className='sm:!flex-row items-center'>
         <CircleProgress
           progress={sprint_completion_percentage}
+          indicatorColor={circleColorProgress}
           label='Выполнение спринта'
         />
         <div className='w-full h-0.5 sm:h-full sm:w-0.5 bg-[#44537126]' />
