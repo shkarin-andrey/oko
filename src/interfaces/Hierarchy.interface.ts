@@ -22,6 +22,7 @@ export interface RootTask {
   increment_points: number;
   is_bug: boolean;
   inherited_increment_points: number;
+  description: string[];
   status: (string | null)[];
   avatar: string[];
   assignee: string;

@@ -1,5 +1,5 @@
-import { FC, memo } from 'react';
-import { Handle, Position } from 'reactflow';
+import { FC, memo, useState } from 'react';
+import { Handle, NodeToolbar, Position } from 'reactflow';
 
 import noAvatar from '/no-avatar.svg';
 import bugImg from '/taskType/bug.svg';
@@ -9,12 +9,32 @@ import { ICustomTaskNode } from './CustomTaskNode.interface';
 
 const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
   const typeTask = data.is_bug ? bugImg : featImg;
+  const [isOpenTooltip, setisOpenTooltip] = useState(false);
 
   return (
-    <div className='p-3 shadow-md rounded-md bg-white w-[260px] relative group'>
-      <div className='hidden absolute top-0 left-1/2 -translate-x-1/2 w-full bg-gray-200 p-2 rounded-md group-hover:block'>
-        {data.summary}
-      </div>
+    <div
+      className={`p-3 shadow-md rounded-md w-[260px] relative ${
+        isOpenTooltip ? 'bg-blue-100' : 'bg-white'
+      }`}
+      aria-hidden
+      onClick={() => setisOpenTooltip(!isOpenTooltip)}
+    >
+      <NodeToolbar
+        isVisible={isOpenTooltip}
+        className='bg-gray-200 p-2 rounded-md max-w-[300px] text-xs'
+        position={Position.Top}
+      >
+        <strong>Название:</strong>
+        <p>{data.summary}</p>
+        {!!data.description[0].trim() && (
+          <>
+            <br />
+            <strong>Описание:</strong>
+            <p>{data.description[0]}</p>
+          </>
+        )}
+      </NodeToolbar>
+
       <div className='flex flex-col gap-2'>
         <div className='font-medium text-base truncate'>{data.summary}</div>
         <div className='flex gap-2'>

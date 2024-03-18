@@ -1,8 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import 'reactflow/dist/style.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-manrope font-normal;
+  }
+}
 
 .react-flow__panel.react-flow__attribution.bottom.right {
   display: none;

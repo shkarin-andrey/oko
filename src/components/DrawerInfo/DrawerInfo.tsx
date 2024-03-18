@@ -1,19 +1,20 @@
-import { FC } from 'react';
 import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  ResponsiveContainer,
+  CategoryScale,
+  Chart as ChartJS,
+  LinearScale,
+  LineElement,
+  PointElement,
   Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
-import { Props as XAxisProps } from 'recharts/types/cartesian/XAxis';
+} from 'chart.js';
+import { FC, useMemo } from 'react';
+import { Line } from 'react-chartjs-2';
 
 import CircleProgress from '../CircleProgress';
 import PeopleList from '../PeopleList';
 import PeopleWrapper from '../PeopleWrapper';
 import { IDrowerInfo } from './DrowerInfo.interface';
+
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip);
 
 const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown }) => {
   const {
@@ -37,45 +38,54 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
     ? 'sm:translate-x-0'
     : 'sm:translate-x-full';
 
-  const burndownData = burndown.map((item) => {
-    const date = item.date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$2.$3');
+  const burndownData = useMemo(() => {
+    const labels: string[] = [];
+    const data: number[] = [];
+
+    burndown.forEach((item) => {
+      const date = item.date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$2.$3');
+
+      labels.push(date);
+      data.push(item.remaining_tasks);
+    });
 
     return {
-      x: date,
-      y: item.remaining_tasks,
+      labels,
+      datasets: [
+        {
+          data,
+          label: 'Закрытые таски',
+          fill: true,
+          borderColor: '#D91528',
+          stepped: true,
+        },
+      ],
     };
-  });
+  }, [burndown]);
 
-  const args: XAxisProps = {
-    dataKey: 'x',
-    type: 'category',
-    tickMargin: 10,
-    angle: 45,
-  };
+  const circleColorProgress = useMemo(() => {
+    if (sprint_completion_percentage < 45) {
+      return '#D91528';
+    }
+
+    if (sprint_completion_percentage >= 45) {
+      return '#F29100';
+    }
+
+    return '#019F3C';
+  }, [sprint_completion_percentage]);
 
   return (
     <div
       className={`sm:max-w-[390px] transition-transform bg-white sm:px-3 sm:py-3 flex flex-col gap-5 sm:absolute right-0 top-0 h-full sm:h-[calc(100vh-73px)] py-5 sm:overflow-y-auto ${classNameInformations}`}
     >
       <PeopleWrapper title='Прогресс закрытия тасок'>
-        <ResponsiveContainer width={'100%'} height={200} className='text-xs'>
-          <LineChart
-            height={200}
-            data={burndownData}
-            title='Прогресс закрытия тасок'
-            margin={{ left: -35, right: 0, bottom: 5 }}
-          >
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis {...args} />
-            <YAxis dataKey={'y'} />
-            <Tooltip />
-            <Line dataKey='y' stroke='#2563eb' />
-          </LineChart>
-        </ResponsiveContainer>
+        <Line data={burndownData} />
       </PeopleWrapper>
       <PeopleWrapper title='Статистика' className='sm:!flex-row items-center'>
         <CircleProgress
           progress={sprint_completion_percentage}
+          indicatorColor={circleColorProgress}
           label='Выполнение спринта'
         />
         <div className='w-full h-0.5 sm:h-full sm:w-0.5 bg-[#44537126]' />
