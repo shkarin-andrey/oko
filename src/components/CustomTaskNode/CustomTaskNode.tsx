@@ -38,7 +38,7 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
       </NodeToolbar>
 
       <div className='flex flex-col gap-2'>
-        <div className='font-medium text-base truncate'>{data.summary}</div>
+        <div className='font-medium text-base line-clamp-3'>{data.summary}</div>
         <div className='flex gap-2'>
           <img src={typeTask} className='w-4 h-4' alt={data.key} />
           <div className='text-sm'>{data.key}</div>
