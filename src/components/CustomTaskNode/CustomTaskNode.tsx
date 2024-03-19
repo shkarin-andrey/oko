@@ -59,6 +59,11 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
             <div className='bg-[#4453711A] text-[#445371] px-[6px] rounded-sm text-sm w-fit'>
               {data.inherited_increment_points}
             </div>
+            {data?.tshirt && (
+              <div className='bg-[#8fff7330] text-[#66c94d] px-[6px] rounded-sm text-sm w-fit'>
+                {data.tshirt}
+              </div>
+            )}
           </div>
           <div
             className='text-xs px-[6px] py-0.5 rounded-sm w-fit'
