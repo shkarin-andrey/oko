@@ -11,6 +11,8 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
   const typeTask = data.is_bug ? bugImg : featImg;
   const [isOpenTooltip, setisOpenTooltip] = useState(false);
 
+  const description = data.description?.[0].trim();
+
   return (
     <div
       className={`p-3 shadow-md rounded-md w-[260px] relative ${
@@ -26,17 +28,17 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
       >
         <strong>Название:</strong>
         <p>{data.summary}</p>
-        {!!data.description[0].trim() && (
+        {!!description && (
           <>
             <br />
             <strong>Описание:</strong>
-            <p>{data.description[0]}</p>
+            <div className='whitespace-pre-line'>{description}</div>
           </>
         )}
       </NodeToolbar>
 
       <div className='flex flex-col gap-2'>
-        <div className='font-medium text-base truncate'>{data.summary}</div>
+        <div className='font-medium text-base line-clamp-3'>{data.summary}</div>
         <div className='flex gap-2'>
           <img src={typeTask} className='w-4 h-4' alt={data.key} />
           <div className='text-sm'>{data.key}</div>
