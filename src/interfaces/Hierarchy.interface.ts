@@ -27,6 +27,7 @@ export interface RootTask {
   avatar: string[];
   assignee: string;
   color: string;
+  tshirt: string | null;
 }
 
 export interface Statistics {
