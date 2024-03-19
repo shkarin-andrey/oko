@@ -27,6 +27,7 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
     sprint_completion_percentage,
     tehdolg_percentage,
     total_bugs,
+    total_issues,
   } = statistics;
 
   const authorNames = Object.keys(authors);
@@ -95,6 +96,10 @@ const DrawerInfo: FC<IDrowerInfo> = ({ statistics, isOpenInformations, burndown 
             <div className='font-semibold text-base'>
               {days_passed} из {total_sprint_days} дней
             </div>
+          </div>
+          <div>
+            <div className='font-normal text-sm'>Сумма ICP:</div>
+            <div className='font-semibold text-base'>{total_issues}</div>
           </div>
           <div>
             <div className='font-normal text-sm'>Технический долг:</div>
