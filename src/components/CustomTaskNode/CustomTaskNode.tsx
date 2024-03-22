@@ -9,7 +9,7 @@ import { ICustomTaskNode } from './CustomTaskNode.interface';
 
 const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
   const typeTask = data.is_bug ? bugImg : featImg;
-  const [isOpenTooltip, setisOpenTooltip] = useState(false);
+  const [isOpenTooltip, setIsOpenTooltip] = useState(false);
 
   const description = data.description?.[0].trim();
 
@@ -19,11 +19,12 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
         isOpenTooltip ? 'bg-blue-100' : 'bg-white'
       }`}
       aria-hidden
-      onClick={() => setisOpenTooltip(!isOpenTooltip)}
+      onMouseEnter={() => setIsOpenTooltip(true)}
+      onMouseLeave={() => setIsOpenTooltip(false)}
     >
       <NodeToolbar
         isVisible={isOpenTooltip}
-        className='bg-gray-200 p-2 rounded-md max-w-[300px] text-xs'
+        className='bg-gray-200 p-2 rounded-md max-w-[300px] text-xs break-words'
         position={Position.Top}
       >
         <strong>Название:</strong>
