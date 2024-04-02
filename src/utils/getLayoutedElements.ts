@@ -2,7 +2,7 @@ import dagre from 'dagre';
 import { Edge, Node, Position } from 'reactflow';
 
 const nodeWidth = 260;
-const nodeHeight = 120;
+const nodeHeight = 150;
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
