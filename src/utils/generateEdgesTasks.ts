@@ -21,7 +21,7 @@ export const generateEdgesTasks = (
       id: uuidv4(),
       source: prevTask?.key ? prevTask.key : task.key,
       target: task.children.length ? task.children[0].key : task.key,
-      type: 'smoothstep',
+      type: 'straight',
       markerEnd,
     };
 
