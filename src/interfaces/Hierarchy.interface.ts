@@ -28,6 +28,7 @@ export interface RootTask {
   assignee: string;
   color: string;
   tshirt: string | null;
+  is_story: boolean;
 }
 
 export interface Statistics {
