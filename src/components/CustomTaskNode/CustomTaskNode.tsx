@@ -4,6 +4,7 @@ import { Handle, NodeToolbar, Position } from 'reactflow';
 import noAvatar from '/no-avatar.svg';
 import bugImg from '/taskType/bug.svg';
 import featImg from '/taskType/feat.svg';
+import storyImg from '/taskType/story.svg';
 
 import { ICustomTaskNode } from './CustomTaskNode.interface';
 
@@ -41,7 +42,11 @@ const CustomTaskNode: FC<ICustomTaskNode> = ({ data }) => {
       <div className='flex flex-col gap-2'>
         <div className='font-medium text-base line-clamp-3'>{data.summary}</div>
         <div className='flex gap-2'>
-          <img src={typeTask} className='w-4 h-4' alt={data.key} />
+          <img
+            src={data.is_story ? storyImg : typeTask}
+            className='w-4 h-4'
+            alt={data.key}
+          />
           <div className='text-sm'>{data.key}</div>
         </div>
         <div className='flex gap-1 items-center'>
