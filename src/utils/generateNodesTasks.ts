@@ -16,14 +16,18 @@ export const generateNodesTasks = (
 
     const node: Node<Omit<NodeData, 'children'>> = {
       id: task.key,
-      data: { ...data, isLeft: prevTask ? true : false, isRight: false },
+      data: {
+        ...data,
+        isLeft: prevTask ? true : false,
+        isRight: false,
+      },
       type: 'task',
       position,
     };
 
     if (task.children.length) {
       acc.push(
-        { ...node, data: { ...data, isRight: true } },
+        { ...node, data: { ...node.data, isRight: true } },
         ...generateNodesTasks(task.children, task),
       );
     } else {
